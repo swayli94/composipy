@@ -61,15 +61,19 @@ class LaminateProperty(Property):
     def __init__(self, stacking, plies):
         # Checking layup
         if not isinstance(stacking, dict): # implements angle stacking sequence
+
             if isinstance(plies, Material):
                 n_plies = len(stacking)
+                self.ply_material = plies
                 plies = [plies for s in range(n_plies)]
+                
             elif len(plies) != len(stacking):
                 raise ValueError('Number of plies and number of stacking must match')
+
             xiA = None
             xiB = None
             xiD = None
-            total_thickness = None
+            total_thickness = sum([ply.thickness for ply in plies])
             layup = list(zip(stacking, plies))
         else:
             try:
@@ -179,7 +183,7 @@ class LaminateProperty(Property):
 
         if not self._xiA is None:
 
-            U1, U2, U3, U4, U5 = self.plies.Invariants()
+            U1, U2, U3, U4, U5 = self.ply_material.Invariants()
             xi1, xi2, xi3, xi4 = self._xiA
             T = self._total_thickness
             A11 = T*(U1 + U2*xi1 + U3*xi3)
@@ -203,6 +207,7 @@ class LaminateProperty(Property):
                 zk1 = self.z_position[i[0]+1]
                 zk0 = self.z_position[i[0]]
                 self._A += (zk1-zk0) * i[1]
+        
         return self._A
     
     @property
@@ -234,7 +239,7 @@ class LaminateProperty(Property):
 
         if not self._xiD is None:
 
-            U1, U2, U3, U4, U5 = self.plies.Invariants()
+            U1, U2, U3, U4, U5 = self.ply_material.Invariants()
             xi1, xi2, xi3, xi4 = self._xiD
             T = self._total_thickness
 
