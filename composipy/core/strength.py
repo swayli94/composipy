@@ -258,16 +258,10 @@ class LaminateStrength():
         data['position'] = []
         data['angle'] = []       
         data['epsilonx'] = []
-        data['epsilonx'] = []
-        data['epsilony'] = []
         data['epsilony'] = []
         data['gammaxy'] = []
-        data['gammaxy'] = []
-        data['epsilon1'] = []
         data['epsilon1'] = []
         data['epsilon2'] = []
-        data['epsilon2'] = []
-        data['gamma12'] = []
         data['gamma12'] = []
         for epsilon, epsilon123, theta in zip(epsilon_plies, epsilon_plies_123, stacking):
             epsilon_top, epsilon_bot = epsilon
@@ -334,16 +328,10 @@ class LaminateStrength():
         data['position'] = []
         data['angle'] = []
         data['sigmax'] = []
-        data['sigmax'] = []
-        data['sigmay'] = []
         data['sigmay'] = []
         data['tauxy'] = []
-        data['tauxy'] = []
-        data['sigma1'] = []
         data['sigma1'] = []
         data['sigma2'] = []
-        data['sigma2'] = []
-        data['tau12'] = []
         data['tau12'] = []
         for sigma, sigma_123, theta in zip(stress_plies, stress_plies_123, stacking):
             stress_top, stress_bot = sigma
